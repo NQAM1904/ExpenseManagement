@@ -10,6 +10,8 @@ import {
    TouchableOpacity,
    Alert,
    SafeAreaView,
+   TouchableWithoutFeedback,
+   Keyboard,
 } from 'react-native';
 import Images from '../../res/image';
 import { colors, fonts, screenWidth } from '../../res/style/theme';
@@ -125,82 +127,84 @@ export default class SignUp extends Component {
 
    render() {
       return (
-         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : null}>
-            <StatusBarView />
-            <LoadingView visible={this.props.loading} />
-            <ScrollView
-               showsVerticalScrollIndicator={false}
-               style={styles.container}
-               contentContainerStyle={{ flexGrow: 1 }}
-               keyboardShouldPersistTaps="handled">
-               <Image source={Images.signup_logo} style={styles.logo} />
+         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : null}>
+               <StatusBarView />
+               <LoadingView visible={this.props.loading} />
+               <ScrollView
+                  showsVerticalScrollIndicator={false}
+                  style={styles.container}
+                  contentContainerStyle={{ flexGrow: 1 }}
+                  keyboardShouldPersistTaps="handled">
+                  <Image source={Images.signup_logo} style={styles.logo} />
 
-               <Text style={styles.txtSignup}>Đăng ký tài khoản</Text>
+                  <Text style={styles.txtSignup}>Đăng ký tài khoản</Text>
 
-               <TextInputAnimated
-                  label="Họ và tên"
-                  style={styles.input}
-                  value={this.state.fullname}
-                  onChangeText={this.onChangeFullName}
-                  onPressClear={this.onClearFullName}
-               />
-               <TextInputAnimated
-                  label="Email"
-                  style={styles.input}
-                  value={this.state.email}
-                  onChangeText={this.onChangeEmail}
-                  onPressClear={this.onClearEmail}
-               />
-               <TextInputAnimated
-                  label="Ngày sinh"
-                  isDatePicker
-                  style={styles.input}
-                  value={String(this.state.dob)}
-                  onChange={this.onChangeDOB}
-               />
+                  <TextInputAnimated
+                     label="Họ và tên"
+                     style={styles.input}
+                     value={this.state.fullname}
+                     onChangeText={this.onChangeFullName}
+                     onPressClear={this.onClearFullName}
+                  />
+                  <TextInputAnimated
+                     label="Email"
+                     style={styles.input}
+                     value={this.state.email}
+                     onChangeText={this.onChangeEmail}
+                     onPressClear={this.onClearEmail}
+                  />
+                  <TextInputAnimated
+                     label="Ngày sinh"
+                     isDatePicker
+                     style={styles.input}
+                     value={String(this.state.dob)}
+                     onChange={this.onChangeDOB}
+                  />
 
-               <TextInputAnimated
-                  label="Số điện thoại"
-                  keyboardType="number-pad"
-                  style={styles.input}
-                  value={this.state.phone}
-                  onChangeText={this.onChangePhone}
-                  onPressClear={this.onClearPhone}
-               />
-               <TextInputAnimated
-                  label="Tên đăng nhập"
-                  style={styles.input}
-                  value={this.state.username}
-                  onChangeText={this.onChangeUsername}
-                  onPressClear={this.onClearUsername}
-               />
-               <TextInputAnimated
-                  isPassword
-                  style={styles.input}
-                  label="Mật khẩu"
-                  value={this.state.password}
-                  onChangeText={this.onChangePassword}
-                  onPressClear={this.onClearPassword}
-               />
-               <TextInputAnimated
-                  isPassword
-                  style={styles.input}
-                  label="Nhập lại mật khẩu"
-                  value={this.state.confirmPassword}
-                  onChangeText={this.onChangeConfirmPassword}
-                  onPressClear={this.onClearConfirmPassword}
-               />
-               <TouchableOpacity style={styles.btnSignup} onPress={this.onPressSignUp}>
-                  <Text style={styles.txtBtn}>Đăng ký</Text>
-               </TouchableOpacity>
-               <TouchableOpacity
-                  style={[styles.btnSignup, { backgroundColor: colors.cyan, marginBottom: 20 }]}
-                  onPress={() => this.props.navigation.goBack()}>
-                  <Text style={styles.txtBtn}>Quay lại đăng nhập</Text>
-               </TouchableOpacity>
-               <SafeAreaView />
-            </ScrollView>
-         </KeyboardAvoidingView>
+                  <TextInputAnimated
+                     label="Số điện thoại"
+                     keyboardType="number-pad"
+                     style={styles.input}
+                     value={this.state.phone}
+                     onChangeText={this.onChangePhone}
+                     onPressClear={this.onClearPhone}
+                  />
+                  <TextInputAnimated
+                     label="Tên đăng nhập"
+                     style={styles.input}
+                     value={this.state.username}
+                     onChangeText={this.onChangeUsername}
+                     onPressClear={this.onClearUsername}
+                  />
+                  <TextInputAnimated
+                     isPassword
+                     style={styles.input}
+                     label="Mật khẩu"
+                     value={this.state.password}
+                     onChangeText={this.onChangePassword}
+                     onPressClear={this.onClearPassword}
+                  />
+                  <TextInputAnimated
+                     isPassword
+                     style={styles.input}
+                     label="Nhập lại mật khẩu"
+                     value={this.state.confirmPassword}
+                     onChangeText={this.onChangeConfirmPassword}
+                     onPressClear={this.onClearConfirmPassword}
+                  />
+                  <TouchableOpacity style={styles.btnSignup} onPress={this.onPressSignUp}>
+                     <Text style={styles.txtBtn}>Đăng ký</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                     style={[styles.btnSignup, { backgroundColor: colors.cyan, marginBottom: 20 }]}
+                     onPress={() => this.props.navigation.goBack()}>
+                     <Text style={styles.txtBtn}>Quay lại đăng nhập</Text>
+                  </TouchableOpacity>
+                  <SafeAreaView />
+               </ScrollView>
+            </KeyboardAvoidingView>
+         </TouchableWithoutFeedback>
       );
    }
 }
